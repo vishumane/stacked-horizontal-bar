@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { HorizontalBar, Doughnut, Bar } from 'react-chartjs-2';
+import { HorizontalBar, Bar, Doughnut } from 'react-chartjs-2';
 
 const App = () => {
   const data = {
@@ -19,33 +19,66 @@ const App = () => {
     },
   };
 
+  const employeeSummary = {
+    totalEmployeesCount: 56,
+    activeCount: 43,
+    terminatedCount: 5,
+    mouritechCategoryCount: 0,
+    thirdPartyCategoryCount: 0,
+    contractorCount: 8,
+    enabledCount: 43,
+    disabledCount: 13,
+    billableCount: 44,
+    nonBillableCount: 12,
+  };
+  
+  const revenueInsights = {
+    "totalReceivable": 31000,
+    "totalPayable": 40000
+  };
+
+  const trackingBalanceSummary = {
+    "totalOutstanding": 642336.4,
+    "totalAvailable": 328867.4
+  };
+
   const chartData = {
-    labels: ['Employee', 'Tracking', 'Billing'],
+    labels: ['Employee Status', 'Tracking Access', 'Billable Status'],
     datasets: [
       {
         label: 'Active',
-        backgroundColor: ['#87CEFA', '#87CEFA', '#87CEFA'],
-        data: [data.Employee.Active, data.Tracking.Enabled, data.Billing.Billable],
+        backgroundColor: '#87CEFA',
+        data: [employeeSummary.activeCount, 0, 0],
       },
       {
         label: 'Contractor',
-        backgroundColor: ['#FFA500', '#FFA500', '#FFFFFF'],
-        data: [data.Employee.Contractor, 0, 0],
+        backgroundColor: '#FFA500',
+        data: [employeeSummary.contractorCount, 0, 0],
       },
       {
         label: 'Terminated',
-        backgroundColor: ['#FA8072', '#FA8072', '#FFFFFF'],
-        data: [data.Employee.Terminated, 0, 0],
+        backgroundColor: '#FA8072',
+        data: [employeeSummary.terminatedCount, 0, 0],
+      },
+      {
+        label: 'Enabled',
+        backgroundColor: '#87CEFA',
+        data: [0, employeeSummary.enabledCount, 0],
       },
       {
         label: 'Disabled',
-        backgroundColor: ['#FFFFFF', '#FF0000', '#FFFFFF'],
-        data: [0, data.Tracking.Disabled, 0],
+        backgroundColor: '#FF0000',
+        data: [0, employeeSummary.disabledCount, 0],
       },
       {
-        label: 'NonBillable',
-        backgroundColor: ['#FFFFFF', '#FFFFFF', '#FF0000'],
-        data: [0, 0, data.Billing.NonBillable],
+        label: 'Billable',
+        backgroundColor: '#98FB98',
+        data: [0, 0, employeeSummary.billableCount],
+      },
+      {
+        label: 'Non-Billable',
+        backgroundColor: '#FF0000',
+        data: [0, 0, employeeSummary.nonBillableCount],
       },
     ],
   };
@@ -73,7 +106,7 @@ const App = () => {
     datasets: [
       {
         label: 'Tracking Balance Summary',
-        data: [5000, 7500],
+        data: [trackingBalanceSummary.totalOutstanding, trackingBalanceSummary.totalAvailable],
         backgroundColor: ['#87CEFA', '#98FB98'],
       },
     ],
@@ -85,10 +118,8 @@ const App = () => {
       {
         label: 'Revenue Insights',
         backgroundColor: ['#98FB98', '#FF6347'],
-        data: [15000, 12000],
-        
+        data: [revenueInsights.totalReceivable, revenueInsights.totalPayable],
       },
-   
     ],
   };
 
